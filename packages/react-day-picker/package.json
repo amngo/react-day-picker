@@ -84,5 +84,8 @@
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/gpbl"
+  },
+  "dependencies": {
+    "framer-motion": "^10.12.4"
   }
 }

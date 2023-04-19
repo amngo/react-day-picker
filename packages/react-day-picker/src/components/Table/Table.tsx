@@ -6,6 +6,7 @@ import { Row } from 'components/Row';
 import { useDayPicker } from 'contexts/DayPicker';
 
 import { getMonthWeeks } from './utils/getMonthWeeks';
+import { AnimatePresence, motion } from 'framer-motion';
 
 /** The props for the {@link Table} component. */
 export interface TableProps {
@@ -40,6 +41,23 @@ export function Table(props: TableProps): JSX.Element {
   const HeadComponent = components?.Head ?? Head;
   const RowComponent = components?.Row ?? Row;
   const FooterComponent = components?.Footer ?? Footer;
+
+  const variants = {
+    initial: { opacity: 0, x: '20%' },
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 250,
+        mass: 0.5,
+        opacity: {
+          duration: 0.3
+        }
+      }
+    }
+  };
+
   return (
     <table
       className={classNames.table}
@@ -49,14 +67,24 @@ export function Table(props: TableProps): JSX.Element {
     >
       {!hideHead && <HeadComponent />}
       <tbody className={classNames.tbody} style={styles.tbody} role="rowgroup">
-        {weeks.map((week) => (
-          <RowComponent
-            displayMonth={props.displayMonth}
-            key={week.weekNumber}
-            dates={week.dates}
-            weekNumber={week.weekNumber}
-          />
-        ))}
+        <AnimatePresence initial={false}>
+          {weeks.map((week) => (
+            <motion.tr
+              key={`${week.weekNumber} ${props.displayMonth}`}
+              className={classNames.row}
+              style={styles.row}
+              variants={variants}
+              initial="initial"
+              animate="animate"
+            >
+              <RowComponent
+                displayMonth={props.displayMonth}
+                dates={week.dates}
+                weekNumber={week.weekNumber}
+              />
+            </motion.tr>
+          ))}
+        </AnimatePresence>
       </tbody>
       <FooterComponent displayMonth={props.displayMonth} />
     </table>

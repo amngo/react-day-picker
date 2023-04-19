@@ -35,7 +35,7 @@ export function Row(props: RowProps): JSX.Element {
   }
 
   return (
-    <tr className={classNames.row} style={styles.row}>
+    <>
       {weekNumberCell}
       {props.dates.map((date) => (
         <td
@@ -47,6 +47,6 @@ export function Row(props: RowProps): JSX.Element {
           <DayComponent displayMonth={props.displayMonth} date={date} />
         </td>
       ))}
-    </tr>
+    </>
   );
 }

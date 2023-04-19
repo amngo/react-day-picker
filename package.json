@@ -4,9 +4,9 @@
     "yarn": "3"
   },
   "packageManager": "yarn@3.2.1",
-  "name": "@react-day-picker/monorepo",
-  "private": true,
-  "description": "Monorepo of react-day-picker",
+  "name": "@amngo/react-day-picker",
+  "private": false,
+  "description": "react-day-picker w/ framer-motion",
   "author": "Giampaolo Bellavite <io@gpbl.org>",
   "homepage": "http://react-day-picker.js.org",
   "license": "MIT",
